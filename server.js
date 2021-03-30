@@ -5,10 +5,12 @@ if (!process.env.PORT) {
 
 const express = require('express')
 const path = require('path')
-// const favicon = require('serve-favicon')
+const favicon = require('serve-favicon')
 const logger = require('morgan')
 const cookieParser = require('cookie-parser')
 const methodOverride = require('method-override')
+const indexRoutes = require('./routes/index.js')
+const gunsRoutes = require('./routes/guns.js')
 
 const app = express()
 
@@ -26,16 +28,15 @@ app.set('view engine', 'pug')
 // override with POST having ?_method=DELETE or ?_method=PUT
 app.use(methodOverride('_method'))
 
-// uncomment after placing your favicon in /public
-// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 app.use(logger('dev'))
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
-require('./routes/index.js')(app)
-require('./routes/guns.js')(app)
+app.use('/', gunsRoutes)
+app.use('/', indexRoutes)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
