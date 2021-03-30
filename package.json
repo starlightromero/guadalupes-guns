@@ -1,7 +1,8 @@
 {
-  "name": "petes-pets",
+  "name": "guadalupes-guns",
   "version": "0.0.0",
-  "private": true,
+  "private": false,
+  "author": "Starlight Romero"
   "scripts": {
     "start": "node ./bin/www"
   },
