@@ -1,0 +1,14 @@
+seeds/
+tests/
+.eslint*
+.prettier*
+docker-compose*
+Dockerfile*
+.dockerignore
+.gitignore
+Makefile
+seed.js
+README.md
+.git
+node_modules/
+.env
