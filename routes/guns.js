@@ -4,16 +4,16 @@ const router = express.Router()
 
 const gunsController = require('../controllers/guns')
 
-router.get('/guns/:id', gunsController.getGunById)
+router.get('/:id/edit', gunsController.getUpdateGunForm)
 
-router.get('/guns/new', gunsController.getNewGunForm)
+router.get('/:id', gunsController.getGunById)
 
-router.post('/guns', gunsController.createGun)
+router.get('/new', gunsController.getNewGunForm)
 
-router.get('/guns/:id/edit', gunsController.getUpdateGunForm)
+router.post('/', gunsController.createGun)
 
-router.patch('/guns/:id', gunsController.updateGun)
+router.patch('/:id', gunsController.updateGun)
 
-router.delete('/guns/:id', gunsController.deleteGun)
+router.delete('/:id', gunsController.deleteGun)
 
 module.exports = router
