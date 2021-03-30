@@ -4,24 +4,35 @@
   "private": false,
   "author": "Starlight Romero",
   "scripts": {
-    "start": "node ./bin/www"
+    "start:dev": "nodemon ./bin/www",
+    "start:prod": "node ./bin/www",
+    "format": "prettier --write \"{utils,routes,models,middleware,controllers}/*.js\" && prettier --write ./server.js",
+    "lint-files": "eslint --fix \"{utils,routes,models,middleware,controllers}/*.js\" && eslint --fix ./server.js",
+    "lint": "npm run format && npm run lint-files"
   },
   "dependencies": {
-    "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "dotenv": "^4.0.0",
     "express": "^4.16.4",
     "method-override": "^2.3.10",
-    "mongoose": "^5.1.1",
+    "mongoose": "^5.12.2",
     "morgan": "^1.9.1",
     "pug": "^2.0.0-rc.4",
     "serve-favicon": "~2.4.5",
     "stripe": "^5.3.0"
   },
   "devDependencies": {
-    "chai": "^4.1.2",
-    "chai-http": "^4.0.0",
-    "mocha": "^8.2.0"
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
+    "eslint": "^7.23.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1",
+    "mocha": "^8.3.2",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.2.1"
   }
 }
