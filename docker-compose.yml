@@ -19,6 +19,8 @@ services:
     container_name: node
     volumes:
       - /app/node_modules
+    ports:
+      - 3000:3000
     env_file:
       - .env
     networks:
