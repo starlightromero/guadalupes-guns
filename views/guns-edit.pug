@@ -1,0 +1,30 @@
+extends layout
+
+block content
+    
+    .row.justify-content-center
+        .col-sm-6
+            legend Edit Gun
+            form(action=`/guns/${gun._id}?_method=PATCH`, method="POST")
+                .form-group
+                    label Model
+                    input.form-control(name="model" value=gun.model)
+                .form-group
+                    label Firing Mode
+                    input.form-control(name="firingMode" value=gun.firingMode)   
+                .form-group
+                    label Caliber
+                    input.form-control(name="caliber" value=gun.caliber)    
+                .form-group
+                    label Rectangular Image URL
+                    input.form-control(name="picUrl" value=gun.picUrl) 
+                .form-group
+                    label Square Image URL
+                    input.form-control(name="picUrlSq" value=gun.picUrlSq)     
+                .form-group
+                    label Description
+                    textarea.form-control(name="description")= gun.description
+                button(type="submit").btn.btn-primary Save
+            .text-right
+                form(action=`/guns/${gun._id}?_method=DELETE`, method="POST")
+                    button(type="submit").btn.btn-danger Remove
