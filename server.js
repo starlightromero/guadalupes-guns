@@ -35,7 +35,7 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.use('/', gunsRoutes)
+app.use('/guns', gunsRoutes)
 app.use('/', indexRoutes)
 
 // catch 404 and forward to error handler
