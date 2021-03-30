@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  .row
+    each gun, index in guns
+      .col-sm-4.justify-content-center
+        .card
+          img.card-img-top(src=gun.picUrl, alt='Card image cap')
+          .card-body
+            h4.card-title= gun.model
+            small.text-muted= gun.firingMode
+            p.card-text= gun.description
+            .text-right
+                a.card-link(href=`/guns/${gun._id}`) View #{gun.model}
+
