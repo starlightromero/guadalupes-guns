@@ -1,0 +1,35 @@
+version: '3.9'
+services:
+  mongo:
+    restart: always
+    container_name: mongo
+    image: mongo
+    volumes:
+      - data:/data/db
+    env_file:
+      - .env
+    networks:
+      - guadalupe-network
+
+  node:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: node
+    volumes:
+      - .:/app
+      - /app/node_modules
+    env_file:
+      - .env
+    networks:
+      - guadalupe-network
+    depends_on:
+      - mongo
+
+volumes:
+  data:
+
+networks:
+  guadalupe-network:
+    driver: bridge
