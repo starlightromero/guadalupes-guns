@@ -2,7 +2,7 @@ const express = require('express')
 
 const router = express.Router()
 
-const gunsController = require('./controllers/guns')
+const gunsController = require('../controllers/guns')
 
 router.get('/guns/:id', gunsController.getGunById)
 

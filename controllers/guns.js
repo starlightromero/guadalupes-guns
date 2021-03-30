@@ -1,4 +1,4 @@
-const Gun = require('./models/gun')
+const Gun = require('../models/gun')
 
 exports.getGunById = async (req, res) => {
   const gun = await Gun.findById(req.params.id)
