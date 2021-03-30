@@ -1,8 +1,15 @@
 const Gun = require('../models/gun')
 
 exports.getAllGuns = async (req, res) => {
-  const guns = await Gun.find()
-  res.render('guns-index', { guns: guns })
+  const currentPage = req.query.page || 1
+  const perPage = 2
+  const count = await Gun.find().countDocuments()
+  const guns = Gun.find().skip((currentPage - 1) * perPage)
+  res.render('guns-index', {
+    guns: guns,
+    pagesCount: count / perPage,
+    currentPage: currentPage
+  })
 }
 
 exports.searchGuns = async (req, res) => {
