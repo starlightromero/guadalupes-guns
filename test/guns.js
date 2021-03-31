@@ -121,7 +121,7 @@ describe('Guns', function () {
   })
 
   // TEST UPDATE
-  it('should update a SINGLE gun on /guns/<id> PUT', function (done) {
+  it('should update a SINGLE gun on /guns/<id> PATCH', function (done) {
     const gun = new Gun(ar15)
     gun.save(function (err, data) {
       if (err) {
@@ -129,7 +129,7 @@ describe('Guns', function () {
       }
       chai
         .request(server)
-        .put(`/guns/${data._id}?_method=PUT`)
+        .patch(`/guns/${data._id}?_method=PATCH`)
         .send({ model: 'Mossberg 500' })
         .end(function (err, res) {
           if (err) {
