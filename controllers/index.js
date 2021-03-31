@@ -4,7 +4,9 @@ exports.getAllGuns = async (req, res) => {
   const currentPage = req.query.page || 1
   const perPage = 2
   const count = await Gun.find().countDocuments()
-  const guns = Gun.find().skip((currentPage - 1) * perPage)
+  const guns = await Gun.find()
+    .skip((currentPage - 1) * perPage)
+    .limit(perPage)
   res.render('guns-index', {
     guns: guns,
     pagesCount: count / perPage,
@@ -19,7 +21,9 @@ exports.searchGuns = async (req, res) => {
   const count = await Gun.find().countDocuments()
   const guns = await Gun.find({
     $or: [{ model: term }, { firingMode: term }, { caliber: term }]
-  }).skip((currentPage - 1) * perPage)
+  })
+    .skip((currentPage - 1) * perPage)
+    .limit(perPage)
   res.render('guns-index', {
     guns: guns,
     pagesCount: count / perPage,
