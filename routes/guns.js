@@ -4,11 +4,11 @@ const router = express.Router()
 
 const gunsController = require('../controllers/guns')
 
+router.get('/new', gunsController.getNewGunForm)
+
 router.get('/:id/edit', gunsController.getUpdateGunForm)
 
 router.get('/:id', gunsController.getGunById)
-
-router.get('/new', gunsController.getNewGunForm)
 
 router.post('/', gunsController.createGun)
 
