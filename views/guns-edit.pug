@@ -8,22 +8,22 @@ block content
             form(action=`/guns/${gun._id}?_method=PATCH`, method="POST")
                 .form-group
                     label Model
-                    input.form-control(name="model" value=gun.model)
+                    input.form-control(name="model" value=gun.model required maxlength="25")
                 .form-group
                     label Firing Mode
-                    input.form-control(name="firingMode" value=gun.firingMode)   
+                    input.form-control(name="firingMode" value=gun.firingMode required maxlength="25")   
                 .form-group
                     label Caliber
-                    input.form-control(name="caliber" value=gun.caliber)    
+                    input.form-control(name="caliber" value=gun.caliber required maxlength="25")    
                 .form-group
                     label Rectangular Image URL
-                    input.form-control(name="picUrl" value=gun.picUrl) 
+                    input.form-control(name="picUrl" value=gun.picUrl required type="url" maxlength="100") 
                 .form-group
                     label Square Image URL
-                    input.form-control(name="picUrlSq" value=gun.picUrlSq)     
+                    input.form-control(name="picUrlSq" value=gun.picUrlSq required type="url" maxlength="100")     
                 .form-group
                     label Description
-                    textarea.form-control(name="description")= gun.description
+                    textarea.form-control(name="description" required maxlength="140")= gun.description
                 button(type="submit").btn.btn-primary Save
             .text-right
                 form(action=`/guns/${gun._id}?_method=DELETE`, method="POST")
