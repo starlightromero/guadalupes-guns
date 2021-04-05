@@ -4,18 +4,20 @@ const Schema = mongoose.Schema
 
 const GunSchema = new Schema(
   {
-    model: { type: String, required: true },
+    model: { type: String, required: true, maxLength: 25 },
     firingMode: {
       type: String,
-      enum: ['Single-shot', 'Semi-automatic', 'Automatic', 'Burst']
+      enum: ['Single-shot', 'Semi-automatic', 'Automatic', 'Burst'],
+      required: true,
+      maxLength: 14,
     },
-    caliber: { type: String },
-    picUrl: { type: String },
-    picUrlSq: { type: String },
-    description: { type: String }
+    caliber: { type: String, required: true, maxLength: 25 },
+    picUrl: { type: String, required: true, maxLength: 100 },
+    picUrlSq: { type: String, required: true, maxLength: 100 },
+    description: { type: String, required: true, maxLength: 140 },
   },
   {
-    timestamps: true
+    timestamps: true,
   }
 )
 
