@@ -3,10 +3,11 @@ if (!process.env.PORT) {
   process.env.NODE_ENV = 'dev'
 }
 
-const express = require('express')
 const path = require('path')
-const favicon = require('serve-favicon')
 const logger = require('morgan')
+const express = require('express')
+const mongoose = require('mongoose')
+const favicon = require('serve-favicon')
 const cookieParser = require('cookie-parser')
 const methodOverride = require('method-override')
 const indexRoutes = require('./routes/index.js')
@@ -14,11 +15,10 @@ const gunsRoutes = require('./routes/guns.js')
 
 const app = express()
 
-const mongoose = require('mongoose')
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useFindAndModify: false
+  useFindAndModify: false,
 })
 
 // view engine setup
