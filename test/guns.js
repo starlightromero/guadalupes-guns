@@ -17,13 +17,13 @@ const ar15 = {
   caliber: '.223 Rem',
   picUrl: 'https://upload.wikimedia.org/wikipedia/commons/2/28/Stag2wi_.jpg',
   picUrlSq: 'https://upload.wikimedia.org/wikipedia/commons/2/28/Stag2wi_.jpg',
-  description: 'A lightweight semi-automatic rifle'
+  description: 'A lightweight semi-automatic rifle',
 }
 
 describe('Guns', function () {
   after(function (done) {
     Gun.deleteMany({
-      $or: [{ model: 'AR-15' }, { model: 'Mossberg 500' }]
+      $or: [{ model: 'AR-15' }, { model: 'Mossberg 500' }],
     }).exec(function (err, guns) {
       if (err) {
         done(err)
@@ -130,7 +130,11 @@ describe('Guns', function () {
       chai
         .request(server)
         .patch(`/guns/${data._id}?_method=PATCH`)
-        .send({ model: 'Mossberg 500' })
+        .send({
+          model: 'Mossberg 500',
+          caliber: '12 gague',
+          firingMode: 'Single-shot',
+        })
         .end(function (err, res) {
           if (err) {
             done(err)
