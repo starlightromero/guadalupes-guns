@@ -7,7 +7,7 @@ const mailer = require('../utils/mailer')
 exports.getGunById = async (req, res) => {
   try {
     const gun = await Gun.findById(req.params.id)
-    res.render('guns-show', { gun: gun })
+    res.status(200).render('guns-show', { gun: gun })
   } catch (err) {
     throw new Error(err)
   }
@@ -15,7 +15,7 @@ exports.getGunById = async (req, res) => {
 
 exports.getNewGunForm = (req, res) => {
   const error = req.query.error
-  res.render('guns-new', { error: error })
+  res.status(200).render('guns-new', { error: error })
 }
 
 exports.createGun = async (req, res) => {
@@ -40,7 +40,7 @@ exports.getUpdateGunForm = async (req, res) => {
   const error = req.query.error
   try {
     const gun = await Gun.findById(req.params.id)
-    res.render('guns-edit', { gun: gun, error: error })
+    res.status(200).render('guns-edit', { gun: gun, error: error })
   } catch (err) {
     throw new Error(err)
   }
@@ -68,7 +68,7 @@ exports.updateGun = async (req, res) => {
 exports.deleteGun = async (req, res) => {
   try {
     await Gun.findByIdAndRemove(req.params.id)
-    return res.redirect('/')
+    return res.status(200).redirect('/')
   } catch (err) {
     throw new Error(err)
   }
