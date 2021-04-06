@@ -4,8 +4,8 @@
   "private": false,
   "author": "Starlight Romero",
   "scripts": {
-    "start:dev": "nodemon ./bin/www",
-    "start:prod": "node ./bin/www",
+    "start:dev": "nodemon server.js",
+    "start:prod": "node server.js",
     "test": "mocha",
     "format": "prettier --write \"{utils,routes,models,middleware,controllers}/*.js\" && prettier --write ./server.js",
     "lint-files": "eslint --fix \"{utils,routes,models,middleware,controllers}/*.js\" && eslint --fix ./server.js",
