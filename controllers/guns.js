@@ -35,9 +35,10 @@ exports.createGun = async (req, res) => {
 }
 
 exports.getUpdateGunForm = async (req, res) => {
+  const error = req.query.error
   try {
     const gun = await Gun.findById(req.params.id)
-    res.render('guns-edit', { gun: gun })
+    res.render('guns-edit', { gun: gun, error: error })
   } catch (err) {
     throw new Error(err)
   }
@@ -46,10 +47,13 @@ exports.getUpdateGunForm = async (req, res) => {
 exports.updateGun = async (req, res) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
-    const error = new Error('Validation failed.')
-    error.statusCode = 422
-    error.data = errors.array()
-    throw error
+    const error = errors.array()[0].param.replace(/([A-Z])/g, ' $1')
+    const formattedError = encodeURIComponent(
+      error.charAt(0).toUpperCase() + error.slice(1)
+    )
+    res
+      .status(422)
+      .redirect(`/guns/${req.params.id}/edit?error=${formattedError}`)
   }
   try {
     const gun = await Gun.findByIdAndUpdate(req.params.id, req.body)
