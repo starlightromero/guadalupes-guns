@@ -20,6 +20,17 @@ const ar15 = {
   description: 'A lightweight semi-automatic rifle',
 }
 
+const mossberg = {
+  model: 'Mossberg 500',
+  firingMode: 'Single-shot',
+  caliber: '12 gauge',
+  picUrl:
+    'https://www.sportsmansoutdoorsuperstore.com/prodimages/25692-DEFAULT-l.jpg',
+  picUrlSq:
+    'https://www.sportsmansoutdoorsuperstore.com/prodimages/25692-DEFAULT-l.jpg',
+  description: 'A pump action shotgun manufactured by O.F. Mossberg & Sons.',
+}
+
 describe('Guns', function () {
   after(function (done) {
     Gun.deleteMany({
@@ -130,11 +141,7 @@ describe('Guns', function () {
       chai
         .request(server)
         .patch(`/guns/${data._id}?_method=PATCH`)
-        .send({
-          model: 'Mossberg 500',
-          caliber: '12 gague',
-          firingMode: 'Single-shot',
-        })
+        .send(mossberg)
         .end(function (err, res) {
           if (err) {
             done(err)
