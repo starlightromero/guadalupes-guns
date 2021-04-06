@@ -32,6 +32,8 @@ const mossberg = {
 }
 
 describe('Guns', function () {
+  this.timeout(5000)
+
   after(function (done) {
     Gun.deleteMany({
       $or: [{ model: 'AR-15' }, { model: 'Mossberg 500' }],
@@ -155,7 +157,7 @@ describe('Guns', function () {
 
   // TEST DELETE
   it('should delete a SINGLE gun on /guns/<id> DELETE', function (done) {
-    const gun = new Gun(ar15)
+    const gun = new Gun(mossberg)
     gun.save(function (err, data) {
       if (err) {
         done(err)
