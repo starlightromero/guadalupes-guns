@@ -8,6 +8,8 @@ const gunsController = require('../controllers/guns')
 
 router.get('/new', gunsController.getNewGunForm)
 
+router.post('/:id/purchase', gunsController.purchaseGun)
+
 router.get('/:id/edit', gunsController.getUpdateGunForm)
 
 router.get('/:id', gunsController.getGunById)
