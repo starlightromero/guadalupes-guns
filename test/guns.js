@@ -5,8 +5,8 @@ const Gun = require('../models/gun')
 
 const mocha = require('mocha')
 const describe = mocha.describe
-const it = mocha.it
 const after = mocha.after
+const it = mocha.it
 
 const { expect } = chai
 chai.use(chaiHttp)
@@ -18,6 +18,7 @@ const ar15 = {
   picUrl: 'https://upload.wikimedia.org/wikipedia/commons/2/28/Stag2wi_.jpg',
   picUrlSq: 'https://upload.wikimedia.org/wikipedia/commons/2/28/Stag2wi_.jpg',
   description: 'A lightweight semi-automatic rifle',
+  price: 999.99,
 }
 
 const mossberg = {
@@ -29,6 +30,7 @@ const mossberg = {
   picUrlSq:
     'https://www.sportsmansoutdoorsuperstore.com/prodimages/25692-DEFAULT-l.jpg',
   description: 'A pump action shotgun manufactured by O.F. Mossberg & Sons.',
+  price: 559.99,
 }
 
 describe('Guns', function () {
