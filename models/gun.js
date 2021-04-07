@@ -15,6 +15,7 @@ const GunSchema = new Schema(
     picUrl: { type: String, required: true, maxLength: 100 },
     picUrlSq: { type: String, required: true, maxLength: 100 },
     description: { type: String, required: true, maxLength: 140 },
+    price: { type: Number, required: true },
   },
   {
     timestamps: true,
