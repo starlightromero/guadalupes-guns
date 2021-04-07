@@ -90,7 +90,7 @@ exports.purchaseGun = async (req, res) => {
 
   try {
     const gun = await Gun.findById(gunId)
-    const charge = stripe.charges.create({
+    const charge = await stripe.charges.create({
       amount: gun.price * 100,
       currency: 'usd',
       description: `Purchased ${gun.model}, ${gun.caliber}, ${gun.firingMode}`,
