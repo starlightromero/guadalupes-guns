@@ -15,6 +15,8 @@ const gunsRoutes = require('./routes/guns.js')
 
 const app = express()
 
+app.locals.PUBLIC_STRIPE_API_KEY = process.env.PUBLIC_STRIPE_API_KEY
+
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
