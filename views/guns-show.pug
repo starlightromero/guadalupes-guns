@@ -12,4 +12,14 @@ block content
       p=gun.description
       .text-right
         a(href="/guns/" + gun.id + "/edit").btn-link Edit
+      form(action=`/guns/${gun._id}/purchase`, method="POST")
+        script.stripe-button(src="https://checkout.stripe.com/checkout.js",
+        data-key=PUBLIC_STRIPE_API_KEY,
+        data-amount=gun.price*100,
+        data-name="Guadalupe's Guns",
+        data-description="Widget",
+        data-image="https://stripe.com/img/documentation/checkout/marketplace.png",
+        data-locale="auto",
+        data-zip-code="true")
+        input.form-control(type="hidden" value=gun._id name="gunId")
       
