@@ -26,6 +26,9 @@ block content
         .form-group
           label Description
           textarea.form-control(name="description" required maxlength="140")= gun.description
+        .form-group
+          label Price
+          textarea.form-control(name="price" required type="number")= gun.price
         button(type="submit").btn.btn-primary Save
           .text-right
             form(action=`/guns/${gun._id}?_method=DELETE`, method="POST")
