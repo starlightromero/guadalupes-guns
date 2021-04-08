@@ -75,7 +75,6 @@ exports.deleteGun = async (req, res) => {
 }
 
 exports.purchaseGun = async (req, res) => {
-  console.log(req.body)
   // Set your secret key: remember to change this to your live secret key in production
   // See your keys here: https://dashboard.stripe.com/account/apikeys
   const stripe = require('stripe')(process.env.PRIVATE_STRIPE_API_KEY)
