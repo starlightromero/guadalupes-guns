@@ -17,37 +17,43 @@ router.get('/:id', gunsController.getGunById)
 router.post(
   '/',
   [
-    body('model').isLength({ min: 1, max: 25 }).not().isEmpty().trim().escape(),
+    body('model').trim().isLength({ min: 1, max: 25 }).not().isEmpty().escape(),
     body('firingMode')
+      .trim()
       .isLength({ min: 1, max: 14 })
       .not()
       .isEmpty()
-      .trim()
       .escape(),
     body('caliber')
+      .trim()
       .isLength({ min: 1, max: 25 })
       .not()
       .isEmpty()
-      .trim()
       .escape(),
     body('picUrl')
+      .trim()
       .isLength({ min: 1, max: 100 })
       .not()
       .isEmpty()
-      .trim()
-      .escape(),
+      .isURL(),
     body('picUrlSq')
+      .trim()
       .isLength({ min: 1, max: 100 })
       .not()
       .isEmpty()
-      .trim()
-      .escape(),
+      .isURL(),
     body('description')
+      .trim()
       .isLength({ min: 1, max: 140 })
       .not()
       .isEmpty()
-      .trim()
       .escape(),
+    body('price')
+      .trim()
+      .isLength({ min: 1, max: 8 })
+      .not()
+      .isEmpty()
+      .isDecimal(),
   ],
   gunsController.createGun
 )
@@ -55,37 +61,43 @@ router.post(
 router.patch(
   '/:id',
   [
-    body('model').isLength({ min: 1, max: 25 }).not().isEmpty().trim().escape(),
+    body('model').trim().isLength({ min: 1, max: 25 }).not().isEmpty().escape(),
     body('firingMode')
+      .trim()
       .isLength({ min: 1, max: 14 })
       .not()
       .isEmpty()
-      .trim()
       .escape(),
     body('caliber')
+      .trim()
       .isLength({ min: 1, max: 25 })
       .not()
       .isEmpty()
-      .trim()
       .escape(),
     body('picUrl')
+      .trim()
       .isLength({ min: 1, max: 100 })
       .not()
       .isEmpty()
-      .trim()
-      .escape(),
+      .isURL(),
     body('picUrlSq')
+      .trim()
       .isLength({ min: 1, max: 100 })
       .not()
       .isEmpty()
-      .trim()
-      .escape(),
+      .isURL(),
     body('description')
+      .trim()
       .isLength({ min: 1, max: 140 })
       .not()
       .isEmpty()
-      .trim()
       .escape(),
+    body('price')
+      .trim()
+      .isLength({ min: 1, max: 8 })
+      .not()
+      .isEmpty()
+      .isDecimal(),
   ],
   gunsController.updateGun
 )
