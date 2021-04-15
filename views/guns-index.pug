@@ -5,7 +5,10 @@ block content
     each gun, index in guns
       .col-sm-4.justify-content-center
         .card
-          img.card-img-top(src=gun.picUrl, alt='Card image cap')
+          if gun.avatarUrl
+            img.card-img-top(src=gun.avatarUrl + '-standard.', alt='Card image cap')
+          else
+            img.card-img-top(src=gun.picUrl, alt='Card image cap')
           .card-body
             h4.card-title= gun.model
             small.text-muted= gun.firingMode
