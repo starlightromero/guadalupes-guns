@@ -4,6 +4,34 @@ const Gun = require('../models/gun')
 
 const mailer = require('../utils/mailer')
 
+const Upload = require('s3-uploader')
+
+const client = new Upload(process.env.S3_BUCKET, {
+  aws: {
+    path: 'guns/avatar',
+    region: process.env.S3_REGION,
+    acl: 'public-read',
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  },
+  cleanup: {
+    versions: true,
+    original: true,
+  },
+  versions: [
+    {
+      maxWidth: 400,
+      aspect: '16:10',
+      suffix: '-standard',
+    },
+    {
+      maxWidth: 300,
+      aspect: '1:1',
+      suffix: '-square',
+    },
+  ],
+})
+
 exports.getGunById = async (req, res) => {
   try {
     const gun = await Gun.findById(req.params.id)
@@ -20,6 +48,9 @@ exports.getNewGunForm = (req, res) => {
 
 exports.createGun = async (req, res) => {
   const errors = validationResult(req)
+  console.log('\nCreate Gun\n')
+  console.log(req.body)
+  console.log(errors)
   if (!errors.isEmpty()) {
     const error = errors.array()[0].param.replace(/([A-Z])/g, ' $1')
     const formattedError = encodeURIComponent(
@@ -30,6 +61,23 @@ exports.createGun = async (req, res) => {
   try {
     const gun = new Gun(req.body)
     await gun.save()
+    if (req.file) {
+      client.upload(req.file.path, {}, (err, versions, meta) => {
+        if (err) {
+          return res.status(400).send({ err: err })
+        }
+        versions.forEach((image) => {
+          const urlArray = image.url.split('-')
+          urlArray.pop()
+          const url = urlArray.join('-')
+          gun.avatarUrl = url
+          gun.save()
+        })
+        res.send({ gun: gun })
+      })
+    } else {
+      res.send({ gun: gun })
+    }
     res.redirect(`/guns/${gun._id}`)
   } catch (err) {
     res.status(400).send(err.errors)
@@ -83,7 +131,7 @@ exports.purchaseGun = async (req, res) => {
   // Get the payment token ID submitted by the form:
   const token = req.body.stripeToken // Using Express
 
-  // req.body.petId can become null through seeding,
+  // req.body.gunId can become null through seeding,
   // this way we'll insure we use a non-null value
   const gunId = req.body.gunId || req.params.id
 
