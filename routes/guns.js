@@ -6,6 +6,10 @@ const router = express.Router()
 
 const gunsController = require('../controllers/guns')
 
+// UPLOADING TO AWS S3
+const multer = require('multer')
+const upload = multer({ dest: 'uploads/' })
+
 router.get('/new', gunsController.getNewGunForm)
 
 router.post('/:id/purchase', gunsController.purchaseGun)
@@ -30,18 +34,7 @@ router.post(
       .not()
       .isEmpty()
       .escape(),
-    body('picUrl')
-      .trim()
-      .isLength({ min: 1, max: 100 })
-      .not()
-      .isEmpty()
-      .isURL(),
-    body('picUrlSq')
-      .trim()
-      .isLength({ min: 1, max: 100 })
-      .not()
-      .isEmpty()
-      .isURL(),
+    body('avatar').not().isEmpty(),
     body('description')
       .trim()
       .isLength({ min: 1, max: 140 })
@@ -55,6 +48,7 @@ router.post(
       .isEmpty()
       .isDecimal(),
   ],
+  upload.single('avatar'),
   gunsController.createGun
 )
 
@@ -74,18 +68,7 @@ router.patch(
       .not()
       .isEmpty()
       .escape(),
-    body('picUrl')
-      .trim()
-      .isLength({ min: 1, max: 100 })
-      .not()
-      .isEmpty()
-      .isURL(),
-    body('picUrlSq')
-      .trim()
-      .isLength({ min: 1, max: 100 })
-      .not()
-      .isEmpty()
-      .isURL(),
+    body('avatar').not().isEmpty(),
     body('description')
       .trim()
       .isLength({ min: 1, max: 140 })
