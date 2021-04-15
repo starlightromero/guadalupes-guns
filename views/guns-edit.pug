@@ -9,26 +9,39 @@ block content
       legend Edit Gun
       form(action=`/guns/${gun._id}?_method=PATCH`, method="POST")
         .form-group
-          label Model
+          label Model*
           input.form-control(name="model" value=gun.model required maxlength="25")
         .form-group
-          label Firing Mode
-          input.form-control(name="firingMode" value=gun.firingMode required maxlength="25")   
+            label Firing Mode*
+            select.form-control(name="firingMode" required)
+              if gun.firingMode === "Single-shot"
+                option(value="Single-shot" selected) Single-shot
+              else
+                option(value="Single-shot") Single-shot
+              if gun.firingMode === "Semi-automatic"
+                option(value="Semi-automatic" selected) Semi-automatic
+              else
+                option(value="Semi-automatic") Semi-automatic
+              if gun.firingMode === "Automatic"
+                option(value="Automatic" selected) Automatic
+              else
+                option(value="Automatic") Automatic
+              if gun.firingMode === "Burst"
+                option(value="Burst" selected) Burst 
+              else
+                option(value="Burst") Burst 
         .form-group
-          label Caliber
+          label Caliber*
           input.form-control(name="caliber" value=gun.caliber required maxlength="25")    
         .form-group
-          label Rectangular Image URL
-          input.form-control(name="picUrl" value=gun.picUrl required type="url" maxlength="100") 
+            label Avatar*
+            input.form-control(name="avatar" type="file" required)   
         .form-group
-          label Square Image URL
-          input.form-control(name="picUrlSq" value=gun.picUrlSq required type="url" maxlength="100")     
-        .form-group
-          label Description
+          label Description*
           textarea.form-control(name="description" required maxlength="140")= gun.description
         .form-group
-          label Price
-          textarea.form-control(name="price" required type="number")= gun.price
+          label Price*
+          input.form-control(name="price" required type="number")= gun.price
         button(type="submit").btn.btn-primary Save
           .text-right
             form(action=`/guns/${gun._id}?_method=DELETE`, method="POST")
