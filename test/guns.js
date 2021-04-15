@@ -61,6 +61,22 @@ describe('Guns', function () {
         done()
       })
   })
+  
+  it('should list ALL pets on /pets GET', function(done) {
+    chai
+      .request(server)
+      .get('/')
+      .set('content-type', 'application/json')
+      .end(function(err, res){
+        if (err) {
+          done(err)
+        }
+        expect(res).to.have.status(200)
+        expect(res).to.be('json')
+        expect(res.body).to.be.a('object')
+        done();
+      });
+  });
 
   // TEST NEW
   it('should display new form on /guns/new GET', function (done) {

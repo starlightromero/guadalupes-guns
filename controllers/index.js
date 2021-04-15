@@ -7,11 +7,19 @@ exports.getAllGuns = async (req, res) => {
   const guns = await Gun.find()
     .skip((currentPage - 1) * perPage)
     .limit(perPage)
-  res.status(200).render('guns-index', {
-    guns: guns,
-    pagesCount: count / perPage,
-    currentPage: currentPage,
-  })
+  if (req.header('Content-Type') === 'application/json') {
+    return res.json({
+      guns: guns,
+      pagesCount: count / perPage,
+      currentPage: currentPage,
+    })
+  } else {
+    res.status(200).render('guns-index', {
+      guns: guns,
+      pagesCount: count / perPage,
+      currentPage: currentPage,
+    })
+  }
 }
 
 exports.searchGuns = async (req, res) => {
