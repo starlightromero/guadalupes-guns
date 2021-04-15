@@ -7,14 +7,13 @@ block content
         img.card-img-top(src=gun.avatarUrl + '-square.', alt='Card image cap')
       else
         img.card-img-top(src=gun.picUrlSq, alt='Card image cap')
-      //- img(src=gun.picUrlSq).img-fluid
     .col-sm-8
       h1=gun.model
       p=gun.firingMode
       p=gun.caliber
       p=gun.description
       .text-right
-        a(href="/guns/" + gun.id + "/edit").btn-link Edit
+        a(href=`/guns/${gun.id}/edit`).btn-link Edit
       form(action=`/guns/${gun._id}/purchase`, method="POST")
         script.stripe-button(src="https://checkout.stripe.com/checkout.js",
         data-key=PUBLIC_STRIPE_API_KEY,
