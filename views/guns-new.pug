@@ -9,24 +9,25 @@ block content
       legend New Gun
       form(action="/guns", method="POST")
         .form-group
-            label Model
+            label Model*
             input.form-control(name="model" required maxlength="25")
         .form-group
-            label Firing Mode
-            input.form-control(name="firingMode" required maxlength="25")
+            label Firing Mode*
+            select.form-control(name="firingMode" required)
+              option(value="Single-shot") Single-shot
+              option(value="Semi-automatic") Semi-automatic
+              option(value="Automatic") Automatic
+              option(value="Burst") Burst
         .form-group
-            label Caliber
+            label Caliber*
             input.form-control(name="caliber" required maxlength="25")
         .form-group
-            label Rectangular Image URL
-            input.form-control(name="picUrl" required type="url" maxlength="100")
+            label Avatar*
+            input.form-control(name="avatar" type="file" required)
         .form-group
-            label Square Image URL
-            input.form-control(name="picUrlSq" required type="url" maxlength="100")
-        .form-group
-            label Description
+            label Description*
             textarea.form-control(name="description" required maxlength="140")
         .form-group
-            label Price
-            textarea.form-control(name="price" required type="number")
+            label Price*
+            input.form-control(name="price" required type="number")
         button(type="submit").btn.btn-primary Save
