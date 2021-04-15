@@ -1,8 +1,6 @@
-'use strict'
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+const { Schema, model } = require('mongoose')
 
-const GunSchema = new Schema(
+const gunSchema = new Schema(
   {
     model: { type: String, required: true, maxLength: 25 },
     firingMode: {
@@ -23,4 +21,12 @@ const GunSchema = new Schema(
   }
 )
 
-module.exports = mongoose.model('Gun', GunSchema)
+gunSchema.index(
+  { model: 'text', firingMode: 'text', caliber: 'text', description: 'text' },
+  {
+    name: 'Gun text index',
+    weights: { model: 10, firingMode: 4, caliber: 2, description: 1 },
+  }
+)
+
+module.exports = model('Gun', gunSchema)
