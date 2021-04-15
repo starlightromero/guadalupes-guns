@@ -7,7 +7,7 @@ block content
       if error
         .alert.alert-danger(role="alert") #{error} is invalid.
       legend Edit Gun
-      form(action=`/guns/${gun._id}?_method=PATCH`, method="POST")
+      form(action=`/guns/${gun._id}?_method=PATCH`, method="POST", enctype="multipart/form-data")
         .form-group
           label Model*
           input.form-control(name="model" value=gun.model required maxlength="25")
